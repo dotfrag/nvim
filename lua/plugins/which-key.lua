@@ -4,7 +4,8 @@ return {
     opts = {
       defaults = {
         ["<leader>q"] = "Quit",
-        ["<leader>r"] = { name = "+regex" },
+        ["<leader>r"] = { name = "+regex", _ = "which_key_ignore" },
+        ["<leader>h"] = { name = "+hunks", _ = "which_key_ignore" },
       },
     },
   },
