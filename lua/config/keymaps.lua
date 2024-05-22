@@ -8,6 +8,9 @@ map("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit" })
 -- Buffers
 map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
 
+-- Save without formatting
+map("n", "<leader>W", "<cmd>noautocmd w<cr>", { desc = "Save Without Formatting" })
+
 -- Regex
 map("n", "<leader>ra", "/[^\\x00-\\x7F]<cr>", { desc = "Find Non-ASCII Characters" })
 map("n", "<leader>rb", "<cmd>s/ /\\r/g<cr>|<cmd>noh<cr>", { desc = "Break Line" })

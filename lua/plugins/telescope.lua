@@ -2,6 +2,7 @@ return {
   "nvim-telescope/telescope.nvim",
   keys = {
     { "<leader>sf", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
+    { "<leader>s.", "<cmd>Telescope resume<cr>", desc = "Resume" },
     {
       "<leader>fl",
       function()
