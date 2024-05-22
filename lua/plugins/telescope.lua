@@ -4,6 +4,13 @@ return {
     { "<leader>sf", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
     { "<leader>s.", "<cmd>Telescope resume<cr>", desc = "Resume" },
     {
+      "<leader>fd",
+      function()
+        require("telescope.builtin").find_files({ search_dirs = { "~/repos/dotfiles", "~/repos/dotfiles-private" } })
+      end,
+      desc = "Find Dotfiles",
+    },
+    {
       "<leader>fl",
       function()
         require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root .. "/LazyVim" })
