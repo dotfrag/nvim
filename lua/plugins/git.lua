@@ -68,6 +68,6 @@ return {
       "GRemove",
       "GBrowse",
     },
-    keys = { { "<leader>gb", "<cmd>Git blame<cr>", desc = "Blame" } },
+    keys = { { "<leader>gB", "<cmd>Git blame<cr>", desc = "Blame" } },
   },
 }
