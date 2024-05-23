@@ -9,6 +9,22 @@ return {
           vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
         end
 
+        map("n", "]c", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "]c", bang = true })
+          else
+            gs.nav_hunk("next")
+          end
+        end, "Next Hunk")
+
+        map("n", "[c", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "[c", bang = true })
+          else
+            gs.nav_hunk("prev")
+          end
+        end, "Prev Hunk")
+
         -- stylua: ignore start
         map("n", "]h", function() gs.nav_hunk("next") end, "Next Hunk")
         map("n", "[h", function() gs.nav_hunk("prev") end, "Prev Hunk")
