@@ -1,30 +1,27 @@
 return {
   -- https://github.com/AstroNvim/AstroNvim/blob/main/lua/astronvim/plugins/neo-tree.lua
+  -- https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Tips#navigation-with-hjkl
   "nvim-neo-tree/neo-tree.nvim",
   init = function() end,
   opts = {
     commands = {
       parent_or_close = function(state)
         local node = state.tree:get_node()
-        if node:has_children() and node:is_expanded() then
-          state.commands.toggle_node(state)
+        if node.type == "directory" and node:is_expanded() then
+          require("neo-tree.sources.filesystem").toggle_directory(state, node)
         else
           require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
         end
       end,
-      child_or_open = function(state)
+      expand_or_open = function(state)
         local node = state.tree:get_node()
-        if node:has_children() then
-          if not node:is_expanded() then -- if unexpanded, expand
-            state.commands.toggle_node(state)
-          else -- if expanded and has children, seleect the next child
-            if node.type == "file" then
-              state.commands.open(state)
-            else
-              require("neo-tree.ui.renderer").focus_node(state, node:get_child_ids()[1])
-            end
+        if node.type == "directory" then
+          if not node:is_expanded() then
+            require("neo-tree.sources.filesystem").toggle_directory(state, node)
+          elseif node:has_children() then
+            require("neo-tree.ui.renderer").focus_node(state, node:get_child_ids()[1])
           end
-        else -- if has no children
+        else
           state.commands.open(state)
         end
       end,
@@ -69,9 +66,10 @@ return {
     window = {
       mappings = {
         ["<space>"] = false,
+        L = "focus_preview",
         Y = "copy_selector",
         h = "parent_or_close",
-        l = "child_or_open",
+        l = "expand_or_open",
       },
     },
   },
