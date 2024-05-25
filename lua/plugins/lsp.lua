@@ -4,6 +4,7 @@ return {
     servers = {
       bashls = {},
       astro = {},
+      biome = {},
     },
   },
 }
