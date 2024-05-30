@@ -35,19 +35,19 @@ return {
       config = {
         -- stylua: ignore
         center = {
-          { action = "Telescope find_files", desc = " Find File",            icon = " ", key = "f" },
-          { action = "ene | startinsert",    desc = " New File",             icon = " ", key = "n" },
-          { action = "Neotree",              desc = " Explorer",             icon = " ", key = "e" },
-          { action = "Telescope projects",   desc = " Projects",             icon = " ", key = "p" },
-          { action = "Telescope oldfiles",   desc = " Recent Files",         icon = " ", key = "r" },
-          { action = "Telescope live_grep",  desc = " Find Text",            icon = " ", key = "g" },
-          { action = config,                 desc = " Config Session",       icon = " ", key = "c" },
-          { action = config_files,           desc = " Config Files",         icon = " ", key = "C" },
-          { action = restore_session,        desc = " Restore Session",      icon = " ", key = "s" },
-          { action = restore_last_session,   desc = " Restore Last Session", icon = "󰦛 ", key = "S" },
-          { action = "LazyExtras",           desc = " Lazy Extras",          icon = " ", key = "x" },
-          { action = "Lazy",                 desc = " Lazy",                 icon = "󰒲 ", key = "l" },
-          { action = "qa",                   desc = " Quit",                 icon = " ", key = "q" },
+          { action = "Telescope find_files", desc = "Find File",            icon = "", key = "f" },
+          { action = "ene | startinsert",    desc = "New File",             icon = "", key = "n" },
+          { action = "Neotree",              desc = "Explorer",             icon = "", key = "e" },
+          { action = "Telescope projects",   desc = "Projects",             icon = "", key = "p" },
+          { action = "Telescope oldfiles",   desc = "Recent Files",         icon = "", key = "r" },
+          { action = "Telescope live_grep",  desc = "Find Text",            icon = "", key = "g" },
+          { action = config,                 desc = "Config Session",       icon = "", key = "c" },
+          { action = config_files,           desc = "Config Files",         icon = "", key = "C" },
+          { action = restore_session,        desc = "Restore Session",      icon = "󰁯", key = "s" },
+          { action = restore_last_session,   desc = "Restore Last Session", icon = "󰦛", key = "S" },
+          { action = "LazyExtras",           desc = "Lazy Extras",          icon = "", key = "x" },
+          { action = "Lazy",                 desc = "Lazy",                 icon = "󰒲", key = "l" },
+          { action = "qa",                   desc = "Quit",                 icon = "", key = "q" },
         },
         footer = function()
           local stats = require("lazy").stats()
@@ -57,6 +57,11 @@ return {
       },
     }
 
+    for _, button in ipairs(opts.config.center) do
+      button.desc = "  " .. button.desc .. string.rep(" ", 40 - #button.desc)
+      button.key_format = "%s"
+    end
+
     local win_height = vim.api.nvim_win_get_height(0) + 2 -- plus 2 for status bar
     local logo_height = 6 + 3 -- logo size + newlines
     local actions_height = #opts.config.center * 2 - 1 -- minus 1 for last item
@@ -64,11 +69,6 @@ return {
     local margin = math.floor((win_height - total_height) / 2)
     logo = string.rep("\n", margin) .. logo .. "\n\n"
     opts.config.header = vim.split(logo, "\n")
-
-    for _, button in ipairs(opts.config.center) do
-      button.desc = button.desc .. string.rep(" ", 40 - #button.desc)
-      button.key_format = "  %s"
-    end
 
     -- close Lazy and re-open when the dashboard is ready
     if vim.o.filetype == "lazy" then
