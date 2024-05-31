@@ -6,7 +6,10 @@ return {
     {
       "<leader>fd",
       function()
-        require("telescope.builtin").find_files({ search_dirs = { "~/repos/dotfiles", "~/repos/dotfiles-private" } })
+        require("telescope.builtin").find_files({
+          hidden = true,
+          search_dirs = { "~/repos/dotfiles", "~/repos/dotfiles-private" },
+        })
       end,
       desc = "Find Dotfiles",
     },
