@@ -7,18 +7,18 @@ return {
     commands = {
       parent_or_close = function(state)
         local node = state.tree:get_node()
-        if node.type == "directory" and node:is_expanded() then
-          require("neo-tree.sources.filesystem").toggle_directory(state, node)
+        if node:has_children() and node:is_expanded() then
+          state.commands.toggle_node(state)
         else
           require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
         end
       end,
       expand_or_open = function(state)
         local node = state.tree:get_node()
-        if node.type == "directory" then
+        if node:has_children() then
           if not node:is_expanded() then
-            require("neo-tree.sources.filesystem").toggle_directory(state, node)
-          elseif node:has_children() then
+            state.commands.toggle_node(state)
+          else
             require("neo-tree.ui.renderer").focus_node(state, node:get_child_ids()[1])
           end
         else
@@ -70,6 +70,8 @@ return {
         Y = "copy_selector",
         h = "parent_or_close",
         l = "expand_or_open",
+        -- h = "close_node",
+        -- l = "open",
       },
     },
   },
