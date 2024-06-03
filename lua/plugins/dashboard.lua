@@ -23,6 +23,7 @@ return {
     -- stylua: ignore start
     local function restore_session() require("persistence").load() end
     local function restore_last_session() require("persistence").load({ last = true }) end
+    local function quit() vim.api.nvim_input("<cmd>qa<cr>") end
     -- stylua: ignore end
 
     local opts = {
@@ -47,7 +48,7 @@ return {
           { action = restore_last_session,   desc = "Restore Last Session", icon = "󰦛", key = "S" },
           { action = "LazyExtras",           desc = "Lazy Extras",          icon = "", key = "x" },
           { action = "Lazy",                 desc = "Lazy",                 icon = "󰒲", key = "l" },
-          { action = "qa",                   desc = "Quit",                 icon = "", key = "q" },
+          { action = quit,                   desc = "Quit",                 icon = "", key = "q" },
         },
         footer = function()
           local stats = require("lazy").stats()
