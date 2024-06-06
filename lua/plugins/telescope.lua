@@ -1,14 +1,15 @@
 return {
   "nvim-telescope/telescope.nvim",
   keys = {
+    { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search Buffer" },
     { "<leader>sf", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
     { "<leader>s.", "<cmd>Telescope resume<cr>", desc = "Resume" },
     {
       "<leader>fd",
       function()
         require("telescope.builtin").find_files({
-          hidden = true,
           search_dirs = { "~/repos/dotfiles", "~/repos/dotfiles-private" },
+          no_ignore = true,
         })
       end,
       desc = "Find Dotfiles",
