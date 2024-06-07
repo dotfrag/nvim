@@ -65,13 +65,10 @@ return {
     },
     window = {
       mappings = {
-        ["<space>"] = false,
         L = "focus_preview",
         Y = "copy_selector",
-        h = "parent_or_close",
-        l = "expand_or_open",
-        -- h = "close_node",
-        -- l = "open",
+        -- h = "parent_or_close",
+        -- l = "expand_or_open",
       },
     },
   },
