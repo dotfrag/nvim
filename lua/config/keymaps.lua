@@ -7,6 +7,10 @@ map("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit" })
 
 -- Buffers
 map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
+map("n", "<leader>ba", function()
+  vim.cmd("BufferLineCloseOthers")
+  LazyVim.ui.bufremove()
+end, { desc = "Delete All Buffer" })
 
 -- Save without formatting
 map("n", "<leader>W", "<cmd>noautocmd w<cr>", { desc = "Save Without Formatting" })
