@@ -8,8 +8,6 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
-      bashls = {},
-      astro = {},
       biome = { filetypes = biome_ft },
     },
   },
