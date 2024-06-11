@@ -36,19 +36,19 @@ return {
       config = {
         -- stylua: ignore
         center = {
-          { action = "Telescope find_files", desc = "Find File",            icon = "", key = "f" },
-          { action = "ene | startinsert",    desc = "New File",             icon = "", key = "n" },
-          { action = "Neotree",              desc = "Explorer",             icon = "", key = "e" },
-          { action = "Telescope projects",   desc = "Projects",             icon = "", key = "p" },
-          { action = "Telescope oldfiles",   desc = "Recent Files",         icon = "", key = "r" },
-          { action = "Telescope live_grep",  desc = "Find Text",            icon = "", key = "g" },
-          { action = config,                 desc = "Config Session",       icon = "", key = "c" },
-          { action = config_files,           desc = "Config Files",         icon = "", key = "C" },
-          { action = restore_session,        desc = "Restore Session",      icon = "󰁯", key = "s" },
-          { action = restore_last_session,   desc = "Restore Last Session", icon = "󰦛", key = "S" },
-          { action = "LazyExtras",           desc = "Lazy Extras",          icon = "", key = "x" },
-          { action = "Lazy",                 desc = "Lazy",                 icon = "󰒲", key = "l" },
-          { action = quit,                   desc = "Quit",                 icon = "", key = "q" },
+          { action = LazyVim.pick(),            desc = "Find File",            icon = "", key = "f" },
+          { action = "ene | startinsert",       desc = "New File",             icon = "", key = "n" },
+          { action = "Neotree",                 desc = "Explorer",             icon = "", key = "e" },
+          { action = "Telescope projects",      desc = "Projects",             icon = "", key = "p" },
+          { action = LazyVim.pick("oldfiles"),  desc = "Recent Files",         icon = "", key = "r" },
+          { action = LazyVim.pick("live_grep"), desc = "Find Text",            icon = "", key = "g" },
+          { action = config,                    desc = "Config Session",       icon = "", key = "c" },
+          { action = config_files,              desc = "Config Files",         icon = "", key = "C" },
+          { action = restore_session,           desc = "Restore Session",      icon = "󰁯", key = "s" },
+          { action = restore_last_session,      desc = "Restore Last Session", icon = "󰦛", key = "S" },
+          { action = "LazyExtras",              desc = "Lazy Extras",          icon = "", key = "x" },
+          { action = "Lazy",                    desc = "Lazy",                 icon = "󰒲", key = "l" },
+          { action = quit,                      desc = "Quit",                 icon = "", key = "q" },
         },
         footer = function()
           local stats = require("lazy").stats()
