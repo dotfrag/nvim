@@ -11,5 +11,5 @@ return {
       end
     end
   end,
-  config = true,
+  opts = {},
 }

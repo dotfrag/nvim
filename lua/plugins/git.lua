@@ -60,7 +60,7 @@ return {
       },
       "nvim-telescope/telescope.nvim",
     },
-    config = true,
+    opts = {},
     keys = { { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" } },
   },
 
