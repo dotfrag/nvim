@@ -1,3 +1,22 @@
+local pick = function()
+  if LazyVim.pick.picker.name == "telescope" then
+    return vim.cmd("Telescope projects")
+  elseif LazyVim.pick.picker.name == "fzf" then
+    local fzf_lua = require("fzf-lua")
+    local history = require("project_nvim.utils.history")
+    local results = history.get_recent_projects()
+    fzf_lua.fzf_exec(results, {
+      actions = {
+        ["default"] = {
+          function(selected)
+            fzf_lua.files({ cwd = selected[1] })
+          end,
+        },
+      },
+    })
+  end
+end
+
 return {
   "nvimdev/dashboard-nvim",
   opts = function()
@@ -17,7 +36,7 @@ return {
 
     local function config_files()
       vim.cmd.cd(vim.fn.stdpath("config"))
-      require("telescope.builtin").find_files()
+      LazyVim.pick.config_files()
     end
 
     -- stylua: ignore start
@@ -39,7 +58,7 @@ return {
           { action = LazyVim.pick(),            desc = "Find File",            icon = "", key = "f" },
           { action = "ene | startinsert",       desc = "New File",             icon = "", key = "n" },
           { action = "Neotree",                 desc = "Explorer",             icon = "", key = "e" },
-          { action = "Telescope projects",      desc = "Projects",             icon = "", key = "p" },
+          { action = pick,                      desc = "Projects",             icon = "", key = "p" },
           { action = LazyVim.pick("oldfiles"),  desc = "Recent Files",         icon = "", key = "r" },
           { action = LazyVim.pick("live_grep"), desc = "Find Text",            icon = "", key = "g" },
           { action = config,                    desc = "Config Session",       icon = "", key = "c" },

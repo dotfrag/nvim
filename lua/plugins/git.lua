@@ -58,7 +58,6 @@ return {
           { "<leader>gd", "<cmd>DiffviewFileHistory<cr>", mode = "v", desc = "Diffview Selection" },
         },
       },
-      "nvim-telescope/telescope.nvim",
     },
     opts = {},
     keys = { { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" } },
