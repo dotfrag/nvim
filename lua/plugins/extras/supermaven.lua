@@ -3,7 +3,9 @@ return {
   dependencies = {
     "supermaven-inc/supermaven-nvim",
     build = ":SupermavenUseFree",
-    opts = {},
+    opts = {
+      disable_inline_completion = true,
+    },
   },
   ---@param opts cmp.ConfigSchema
   opts = function(_, opts)
