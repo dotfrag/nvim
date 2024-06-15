@@ -18,17 +18,14 @@ return {
     {
       "<leader>fl",
       function()
-        require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root .. "/LazyVim" })
+        require("telescope.builtin").find_files({ cwd = LazyVim.get_plugin_path("LazyVim") })
       end,
       desc = "Find Plugin Files",
     },
     {
       "<leader>fL",
       function()
-        require("telescope.builtin").live_grep({
-          cwd = require("lazy.core.config").options.root .. "/LazyVim",
-          glob_pattern = "*.lua",
-        })
+        require("telescope.builtin").live_grep({ cwd = LazyVim.get_plugin_path("LazyVim"), glob_pattern = "*.lua" })
       end,
       desc = "Grep Plugin Files",
     },
