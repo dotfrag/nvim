@@ -25,7 +25,10 @@ return {
         {
           filter = {
             event = "msg_show",
-            find = "Supermaven Free Tier",
+            any = {
+              { find = "Starting Supermaven" },
+              { find = "Supermaven Free Tier" },
+            },
           },
           skip = true,
         },
