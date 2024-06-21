@@ -8,6 +8,9 @@ return {
         ["<leader>h"] = { name = "+hunks", _ = "which_key_ignore" },
       },
     },
+    config = function(_, opts)
+      opts.defaults["<leader>gh"] = nil
+    end,
   },
 
   {
