@@ -83,7 +83,8 @@ return {
     end
 
     local win_height = vim.api.nvim_win_get_height(0) + 2 -- plus 2 for status bar
-    local logo_height = 6 + 3 -- logo size + newlines
+    local _, logo_count = string.gsub(logo, "\n", "") -- count newlines in logo
+    local logo_height = logo_count + 3 -- logo size + newlines
     local actions_height = #opts.config.center * 2 - 1 -- minus 1 for last item
     local total_height = logo_height + actions_height + 2 -- plus for 2 for footer
     local margin = math.floor((win_height - total_height) / 2)
