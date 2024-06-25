@@ -2,7 +2,10 @@ return {
   "nvim-cmp",
   opts = function(_, opts)
     local cmp = require("cmp")
-    opts.mapping["<CR>"] = nil
+    opts.mapping["<CR>"] = function(fallback)
+      cmp.abort()
+      fallback()
+    end
     opts.mapping["<C-y>"] = LazyVim.cmp.confirm()
     opts.mapping["<C-d>"] = cmp.mapping.scroll_docs(4)
     opts.mapping["<C-u>"] = cmp.mapping.scroll_docs(-4)
