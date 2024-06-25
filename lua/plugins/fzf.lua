@@ -1,5 +1,7 @@
+local fd_opts = ""
 local rg_opts = ""
 if LazyVim.has_extra("editor.fzf") then
+  fd_opts = require("fzf-lua").defaults.files.fd_opts
   rg_opts = require("fzf-lua").defaults.grep.rg_opts
 end
 
@@ -10,6 +12,11 @@ return {
     { "<leader>/", "<cmd>FzfLua grep_curbuf<cr>", desc = "Search Buffer" },
     { "<leader>sf", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
     { "<leader>s.", "<cmd>FzfLua resume<cr>", desc = "Resume" },
+    {
+      "<leader>fd",
+      LazyVim.pick("files", { fd_opts = ". ~/repos/dotfiles ~/repos/dotfiles-private " .. fd_opts }),
+      desc = "Find Dotfiles",
+    },
     { "<leader>fl", LazyVim.pick("files", { cwd = LazyVim.get_plugin_path("LazyVim") }), desc = "Find Plugin Files" },
     {
       "<leader>fL",
