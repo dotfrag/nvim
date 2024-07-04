@@ -79,11 +79,6 @@ return {
       require("persistence").load()
     end
 
-    local function config_files()
-      vim.cmd.cd(vim.fn.stdpath("config"))
-      LazyVim.pick.config_files()
-    end
-
     -- stylua: ignore start
     local function restore_session() require("persistence").load() end
     local function restore_last_session() require("persistence").load({ last = true }) end
@@ -100,19 +95,19 @@ return {
       config = {
         -- stylua: ignore
         center = {
-          { action = LazyVim.pick(),            desc = "Find File",            icon = "", key = "f" },
-          { action = "ene | startinsert",       desc = "New File",             icon = "", key = "n" },
-          { action = "Neotree",                 desc = "Explorer",             icon = "", key = "e" },
-          { action = pick,                      desc = "Projects",             icon = "", key = "p" },
-          { action = LazyVim.pick("oldfiles"),  desc = "Recent Files",         icon = "", key = "r" },
-          { action = LazyVim.pick("live_grep"), desc = "Find Text",            icon = "", key = "g" },
-          { action = config,                    desc = "Config Session",       icon = "", key = "c" },
-          { action = config_files,              desc = "Config Files",         icon = "", key = "C" },
-          { action = restore_session,           desc = "Restore Session",      icon = "󰁯", key = "s" },
-          { action = restore_last_session,      desc = "Restore Last Session", icon = "󰦛", key = "S" },
-          { action = "LazyExtras",              desc = "Lazy Extras",          icon = "", key = "x" },
-          { action = "Lazy",                    desc = "Lazy",                 icon = "󰒲", key = "l" },
-          { action = quit,                      desc = "Quit",                 icon = "", key = "q" },
+          { action = 'lua LazyVim.pick()()',              desc = "Find File",            icon = "", key = "f" },
+          { action = "ene | startinsert",                 desc = "New File",             icon = "", key = "n" },
+          { action = "Neotree",                           desc = "Explorer",             icon = "", key = "e" },
+          { action = pick,                                desc = "Projects",             icon = "", key = "p" },
+          { action = 'lua LazyVim.pick("oldfiles")()',    desc = "Recent Files",         icon = "", key = "r" },
+          { action = 'lua LazyVim.pick("live_grep")()',   desc = "Find Text",            icon = "", key = "g" },
+          { action = config,                              desc = "Config Session",       icon = "", key = "c" },
+          { action = 'lua LazyVim.pick.config_files()()', desc = "Config Files",         icon = "", key = "C" },
+          { action = restore_session,                     desc = "Restore Session",      icon = "󰁯", key = "s" },
+          { action = restore_last_session,                desc = "Restore Last Session", icon = "󰦛", key = "S" },
+          { action = "LazyExtras",                        desc = "Lazy Extras",          icon = "", key = "x" },
+          { action = "Lazy",                              desc = "Lazy",                 icon = "󰒲", key = "l" },
+          { action = quit,                                desc = "Quit",                 icon = "", key = "q" },
         },
         footer = function()
           local stats = require("lazy").stats()
