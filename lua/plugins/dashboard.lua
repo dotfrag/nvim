@@ -16,6 +16,21 @@ local pick = function()
       return utils.ansi_from_hl(hl_validate(hl), s)
     end
 
+    ---@param selected string[]
+    ---@param pick? boolean
+    local function cd(selected, pick)
+      local path = selected[1]
+      local ok = project.set_pwd(path)
+      if pick then
+        fzf_lua.files({ cwd = path })
+      else
+        if ok then
+          vim.api.nvim_win_close(0, false)
+          LazyVim.info("Change project dir to " .. path)
+        end
+      end
+    end
+
     local opts = {
       fzf_opts = {
         ["--header"] = string.format(
@@ -32,7 +47,7 @@ local pick = function()
       actions = {
         ["default"] = {
           function(selected)
-            fzf_lua.files({ cwd = selected[1] })
+            cd(selected, true)
           end,
         },
         ["ctrl-s"] = {
@@ -47,12 +62,7 @@ local pick = function()
         },
         ["ctrl-w"] = {
           function(selected)
-            local path = selected[1]
-            local ok = project.set_pwd(path)
-            if ok then
-              vim.api.nvim_win_close(0, false)
-              LazyVim.info("Change project dir to " .. path)
-            end
+            cd(selected)
           end,
         },
       },
