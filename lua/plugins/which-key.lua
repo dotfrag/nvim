@@ -2,15 +2,12 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      defaults = {
-        ["<leader>q"] = "Quit",
-        ["<leader>r"] = { name = "+regex", _ = "which_key_ignore" },
-        ["<leader>h"] = { name = "+hunks", _ = "which_key_ignore" },
+      spec = {
+        { "<leader>q", desc = "Quit" },
+        { "<leader>r", group = "regex", icon = "󰑑" },
+        { "<leader>h", group = "hunks", icon = "" },
       },
     },
-    config = function(_, opts)
-      opts.defaults["<leader>gh"] = nil
-    end,
   },
 
   {
