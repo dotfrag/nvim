@@ -3,7 +3,7 @@ return {
   optional = true,
   keys = {
     { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search Buffer" },
-    { "<leader>sf", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
+    { "<leader>sf", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
     { "<leader>s.", "<cmd>Telescope resume<cr>", desc = "Resume" },
     {
       "<leader>fd",

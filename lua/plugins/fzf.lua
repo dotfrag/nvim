@@ -7,7 +7,7 @@ return {
 
     vim.list_extend(keys, {
       { "<leader>/", "<cmd>FzfLua grep_curbuf<cr>", desc = "Search Buffer" },
-      { "<leader>sf", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
+      { "<leader>sf", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       { "<leader>s.", "<cmd>FzfLua resume<cr>", desc = "Resume" },
       {
         "<leader>fd",
