@@ -1,77 +1,3 @@
-local pick = function()
-  if LazyVim.pick.picker.name == "telescope" then
-    return vim.cmd("Telescope projects")
-  elseif LazyVim.pick.picker.name == "fzf" then
-    local fzf_lua = require("fzf-lua")
-    local project = require("project_nvim.project")
-    local history = require("project_nvim.utils.history")
-    local results = history.get_recent_projects()
-    local utils = require("fzf-lua.utils")
-
-    local function hl_validate(hl)
-      return not utils.is_hl_cleared(hl) and hl or nil
-    end
-
-    local function ansi_from_hl(hl, s)
-      return utils.ansi_from_hl(hl_validate(hl), s)
-    end
-
-    ---@param selected string[]
-    ---@param pick? boolean
-    local function cd(selected, pick)
-      local path = selected[1]
-      local ok = project.set_pwd(path)
-      if pick then
-        fzf_lua.files({ cwd = path })
-      else
-        if ok then
-          vim.api.nvim_win_close(0, false)
-          LazyVim.info("Change project dir to " .. path)
-        end
-      end
-    end
-
-    local opts = {
-      fzf_opts = {
-        ["--header"] = string.format(
-          ":: <%s> to %s | <%s> to %s | <%s> to %s",
-          ansi_from_hl("FzfLuaHeaderBind", "ctrl-s"),
-          ansi_from_hl("FzfLuaHeaderText", "live_grep"),
-          ansi_from_hl("FzfLuaHeaderBind", "ctrl-r"),
-          ansi_from_hl("FzfLuaHeaderText", "oldfiles"),
-          ansi_from_hl("FzfLuaHeaderBind", "ctrl-w"),
-          ansi_from_hl("FzfLuaHeaderText", "change_dir")
-        ),
-      },
-      fzf_colors = true,
-      actions = {
-        ["default"] = {
-          function(selected)
-            cd(selected, true)
-          end,
-        },
-        ["ctrl-s"] = {
-          function(selected)
-            fzf_lua.live_grep({ cwd = selected[1] })
-          end,
-        },
-        ["ctrl-r"] = {
-          function(selected)
-            fzf_lua.oldfiles({ cwd = selected[1] })
-          end,
-        },
-        ["ctrl-w"] = {
-          function(selected)
-            cd(selected)
-          end,
-        },
-      },
-    }
-
-    fzf_lua.fzf_exec(results, opts)
-  end
-end
-
 return {
   "nvimdev/dashboard-nvim",
   opts = function()
@@ -96,6 +22,7 @@ return {
     -- stylua: ignore end
 
     local opts = {
+      logo = logo,
       theme = "doom",
       hide = {
         -- this is taken care of by lualine
@@ -108,7 +35,6 @@ return {
           { action = 'lua LazyVim.pick()()',              desc = "Find File",            icon = "", key = "f" },
           { action = "ene | startinsert",                 desc = "New File",             icon = "", key = "n" },
           { action = "Neotree",                           desc = "Explorer",             icon = "", key = "e" },
-          { action = pick,                                desc = "Projects",             icon = "", key = "p" },
           { action = 'lua LazyVim.pick("oldfiles")()',    desc = "Recent Files",         icon = "", key = "r" },
           { action = 'lua LazyVim.pick("live_grep")()',   desc = "Find Text",            icon = "", key = "g" },
           { action = config,                              desc = "Config Session",       icon = "", key = "c" },
@@ -127,20 +53,6 @@ return {
       },
     }
 
-    for _, button in ipairs(opts.config.center) do
-      button.desc = "  " .. button.desc .. string.rep(" ", 40 - #button.desc)
-      button.key_format = "%s"
-    end
-
-    local win_height = vim.api.nvim_win_get_height(0) + 2 -- plus 2 for status bar
-    local _, logo_count = string.gsub(logo, "\n", "") -- count newlines in logo
-    local logo_height = logo_count + 2 -- logo size + newlines
-    local actions_height = #opts.config.center * 2 - 1 -- minus 1 for last item
-    local total_height = logo_height + actions_height + 2 -- plus for 2 for footer
-    local margin = math.floor((win_height - total_height) / 2)
-    logo = string.rep("\n", margin) .. logo .. "\n"
-    opts.config.header = vim.split(logo, "\n")
-
     -- open dashboard after closing lazy
     if vim.o.filetype == "lazy" then
       vim.api.nvim_create_autocmd("WinClosed", {
@@ -155,5 +67,22 @@ return {
     end
 
     return opts
+  end,
+  config = function(_, opts)
+    local win_height = vim.api.nvim_win_get_height(0) + 2 -- plus 2 for status bar
+    local _, logo_count = string.gsub(opts.logo, "\n", "") -- count newlines in logo
+    local logo_height = logo_count + 2 -- logo size + newlines
+    local actions_height = #opts.config.center * 2 - 1 -- minus 1 for last item
+    local total_height = logo_height + actions_height + 2 -- plus for 2 for footer
+    local margin = math.floor((win_height - total_height) / 2)
+    local logo = string.rep("\n", margin) .. opts.logo .. "\n"
+    opts.config.header = vim.split(logo, "\n")
+
+    for _, button in ipairs(opts.config.center) do
+      button.desc = "  " .. button.desc .. string.rep(" ", 40 - #button.desc)
+      button.key_format = "%s"
+    end
+
+    require("dashboard").setup(opts)
   end,
 }
