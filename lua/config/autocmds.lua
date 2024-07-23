@@ -18,14 +18,28 @@ autocmd("FileType", {
 })
 
 -- open dashboard when closing all buffers
--- https://github.com/LazyVim/LazyVim/discussions/3901#discussioncomment-9976798
+-- https://github.com/LazyVim/LazyVim/discussions/3901#discussioncomment-10023866
 autocmd("BufDelete", {
+  group = augroup("bufdelpost_autocmd"),
+  desc = "BufDeletePost User autocmd",
+  callback = function()
+    vim.schedule(function()
+      vim.api.nvim_exec_autocmds("User", {
+        pattern = "BufDeletePost",
+      })
+    end)
+  end,
+})
+autocmd("User", {
+  pattern = "BufDeletePost",
   group = augroup("dashboard_on_empty"),
-  callback = function(args)
-    local deleted_name = vim.api.nvim_buf_get_name(args.buf)
-    local deleted_ft = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
-    local dashboard_on_empty = (deleted_name == "" and deleted_ft == "")
-      or (vim.api.nvim_buf_get_name(0) == "" and vim.api.nvim_get_option_value("filetype", { buf = 0 }) == "")
+  desc = "Open Dashboard when no available buffers",
+  callback = function(ev)
+    local deleted_name = vim.api.nvim_buf_get_name(ev.buf)
+    local deleted_ft = vim.api.nvim_get_option_value("filetype", { buf = ev.buf })
+    local deleted_bt = vim.api.nvim_get_option_value("buftype", { buf = ev.buf })
+    local dashboard_on_empty = deleted_name == "" and deleted_ft == "" and deleted_bt == ""
+
     if dashboard_on_empty then
       vim.cmd("Dashboard")
     end
