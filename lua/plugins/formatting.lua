@@ -16,13 +16,13 @@ return {
       jsonc = { "biome" },
 
       -- prettier
-      html = { { "prettierd", "prettier" } },
-      css = { { "prettierd", "prettier" } },
-      scss = { { "prettierd", "prettier" } },
-      less = { { "prettierd", "prettier" } },
-      yaml = { { "prettierd", "prettier" } },
-      markdown = { { "prettierd", "prettier" } },
-      ["markdown.mdx"] = { { "prettierd", "prettier" } },
+      html = { "prettierd" },
+      css = { "prettierd" },
+      scss = { "prettierd" },
+      less = { "prettierd" },
+      yaml = { "prettierd" },
+      markdown = { "prettierd" },
+      ["markdown.mdx"] = { "prettierd" },
     },
   },
 }
