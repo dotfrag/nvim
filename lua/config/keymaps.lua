@@ -22,3 +22,13 @@ map("n", "<leader>rc", "<cmd>:%s/[[:cntrl:]]//<cr>``", { desc = "Remove Control 
 map("n", "<leader>rp", "<cmd>:%s/[^[:print:]]//<cr>``", { desc = "Remove Non-Printable Characters" })
 map("n", "<leader>rt", "<cmd>:%s/\\s\\+$//<cr>``", { desc = "Remove Trailing Whitespace" })
 map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace Word" })
+
+-- Neovide copy/paste
+-- https://github.com/neovide/neovide/issues/1282#issuecomment-1980984696
+if vim.g.neovide then
+  map("v", "<CS-c>", '"+y') -- Copy
+  map("n", "<CS-v>", '"+P') -- Paste normal mode
+  map("v", "<CS-v>", '"+P') -- Paste visual mode
+  map("c", "<CS-v>", "<C-R>+") -- Paste command mode
+  map("i", "<CS-v>", "<C-R>+") -- Paste insert mode
+end
