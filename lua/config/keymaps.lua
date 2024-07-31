@@ -31,4 +31,5 @@ if vim.g.neovide then
   map("v", "<CS-v>", '"+P') -- Paste visual mode
   map("c", "<CS-v>", "<C-R>+") -- Paste command mode
   map("i", "<CS-v>", "<C-R>+") -- Paste insert mode
+  map("t", "<CS-v>", '<C-\\><C-o>"+p') -- Paste terminal mode
 end
