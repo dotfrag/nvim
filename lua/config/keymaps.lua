@@ -15,6 +15,10 @@ end, { desc = "Delete All Buffers" })
 -- Save without formatting
 map("n", "<leader>W", "<cmd>noautocmd w<cr>", { desc = "Save Without Formatting" })
 
+-- Navigate command-line history
+map("c", "<C-j>", "<Down>", { desc = "Next Command" })
+map("c", "<C-k>", "<Up>", { desc = "Previous Command" })
+
 -- Regex
 map("n", "<leader>ra", "/[^\\x00-\\x7F]<cr>", { desc = "Find Non-ASCII Characters" })
 map("n", "<leader>rb", "<cmd>s/ /\\r/g<cr>|<cmd>noh<cr>", { desc = "Break Line" })
