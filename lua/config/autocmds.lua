@@ -7,7 +7,7 @@ local autocmd = vim.api.nvim_create_autocmd
 -- close some filetypes with <q>
 -- https://github.com/LazyVim/LazyVim/blob/6202dd164466250b5c188918b34b3e8a3fec2604/lua/lazyvim/config/autocmds.lua#L53
 autocmd("FileType", {
-  group = augroup("close_with_q"),
+  group = "lazyvim_close_with_q",
   pattern = {
     "fugitiveblame",
   },
