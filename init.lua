@@ -18,6 +18,14 @@ require("lazy").setup({
   spec = {
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "plugins" },
+
+    {
+      "iamcco/markdown-preview.nvim",
+      build = function()
+        require("lazy").load({ plugins = { "markdown-preview.nvim" } })
+        vim.fn["mkdp#util#install"]()
+      end,
+    },
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = { enabled = true, notify = false },
