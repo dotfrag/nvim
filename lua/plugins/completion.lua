@@ -1,5 +1,5 @@
 return {
-  "nvim-cmp",
+  "hrsh7th/nvim-cmp",
   opts = function(_, opts)
     local cmp = require("cmp")
     opts.mapping["<CR>"] = function(fallback)
@@ -9,6 +9,34 @@ return {
     opts.mapping["<C-y>"] = LazyVim.cmp.confirm()
     opts.mapping["<C-d>"] = cmp.mapping.scroll_docs(4)
     opts.mapping["<C-u>"] = cmp.mapping.scroll_docs(-4)
+
+    -- https://github.com/LazyVim/LazyVim/pull/4052#issuecomment-2249293126
+    opts.window = {
+      completion = cmp.config.window.bordered({
+        border = {
+          { "󱐋", "WarningMsg" },
+          { "─", "Comment" },
+          { "╮", "Comment" },
+          { "│", "Comment" },
+          { "╯", "Comment" },
+          { "─", "Comment" },
+          { "╰", "Comment" },
+          { "│", "Comment" },
+        },
+      }),
+      documentation = cmp.config.window.bordered({
+        border = {
+          { "", "DiagnosticHint" },
+          { "─", "Comment" },
+          { "╮", "Comment" },
+          { "│", "Comment" },
+          { "╯", "Comment" },
+          { "─", "Comment" },
+          { "╰", "Comment" },
+          { "│", "Comment" },
+        },
+      }),
+    }
   end,
   keys = function()
     return {
