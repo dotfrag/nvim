@@ -17,34 +17,33 @@ autocmd("FileType", {
   end,
 })
 
--- open dashboard when closing all buffers
--- https://github.com/LazyVim/LazyVim/discussions/3901#discussioncomment-10023866
-autocmd("BufDelete", {
-  group = augroup("bufdelpost_autocmd"),
-  desc = "BufDeletePost User autocmd",
-  callback = function()
-    vim.schedule(function()
-      vim.api.nvim_exec_autocmds("User", {
-        pattern = "BufDeletePost",
-      })
-    end)
-  end,
-})
-autocmd("User", {
-  pattern = "BufDeletePost",
-  group = augroup("dashboard_on_empty"),
-  desc = "Open Dashboard when no available buffers",
-  callback = function(ev)
-    local deleted_name = vim.api.nvim_buf_get_name(ev.buf)
-    local deleted_ft = vim.api.nvim_get_option_value("filetype", { buf = ev.buf })
-    local deleted_bt = vim.api.nvim_get_option_value("buftype", { buf = ev.buf })
-    local dashboard_on_empty = deleted_name == "" and deleted_ft == "" and deleted_bt == ""
-
-    if dashboard_on_empty then
-      vim.cmd("Dashboard")
-    end
-  end,
-})
+-- -- open dashboard when closing all buffers
+-- -- https://github.com/LazyVim/LazyVim/discussions/3901#discussioncomment-10023866
+-- autocmd("BufDelete", {
+--   group = augroup("bufdelpost_autocmd"),
+--   desc = "BufDeletePost User autocmd",
+--   callback = function()
+--     vim.schedule(function()
+--       vim.api.nvim_exec_autocmds("User", {
+--         pattern = "BufDeletePost",
+--       })
+--     end)
+--   end,
+-- })
+-- autocmd("User", {
+--   pattern = "BufDeletePost",
+--   group = augroup("dashboard_on_empty"),
+--   desc = "Open Dashboard when no available buffers",
+--   callback = function(ev)
+--     local deleted_name = vim.api.nvim_buf_get_name(ev.buf)
+--     local deleted_ft = vim.api.nvim_get_option_value("filetype", { buf = ev.buf })
+--     local deleted_bt = vim.api.nvim_get_option_value("buftype", { buf = ev.buf })
+--     local dashboard_on_empty = deleted_name == "" and deleted_ft == "" and deleted_bt == ""
+--     if dashboard_on_empty then
+--       vim.cmd("Dashboard")
+--     end
+--   end,
+-- })
 
 -- disable autoformat for yazi config files
 autocmd("BufEnter", {
@@ -58,7 +57,7 @@ autocmd("BufEnter", {
 -- -- organise imports for typescript files
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --   group = augroup("organise_imports"),
---   pattern = "*.ts",
+--   pattern = "typescript",
 --   callback = function()
 --     ---@diagnostic disable-next-line: assign-type-mismatch
 --     vim.lsp.buf.code_action({ apply = true, context = { only = { "source.addMissingImports.ts" }, diagnostics = {} } })
