@@ -11,5 +11,9 @@ return {
       end
     end
   end,
-  opts = {},
+  opts = {
+    keymaps = {
+      ["<C-s>"] = "<cmd>w<cr><esc>",
+    },
+  },
 }
