@@ -26,6 +26,17 @@ map("n", "<leader>rc", "<cmd>:%s/[[:cntrl:]]//<cr>``", { desc = "Remove Control 
 map("n", "<leader>rp", "<cmd>:%s/[^[:print:]]//<cr>``", { desc = "Remove Non-Printable Characters" })
 map("n", "<leader>rt", "<cmd>:%s/\\s\\+$//<cr>``", { desc = "Remove Trailing Whitespace" })
 map("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace Word" })
+map("n", "<leader>rm", function()
+  local tabstop = vim.bo.tabstop
+  local shiftwidth = vim.bo.shiftwidth
+  local textwidth = vim.bo.textwidth
+  local expandtab = vim.bo.expandtab and "" or "no"
+  local modeline = string.format("vim: set ts=%d sw=%d tw=%d %set :", tabstop, shiftwidth, textwidth, expandtab)
+  local commentstring = vim.bo.commentstring
+  modeline = commentstring:gsub("%%s", modeline)
+  vim.api.nvim_buf_set_lines(0, -1, -1, false, { modeline })
+  vim.api.nvim_feedkeys("Gzz", "n", false)
+end, { desc = "Append Modeline", noremap = true, silent = true })
 
 -- Neovide copy/paste
 -- https://github.com/neovide/neovide/issues/1282#issuecomment-1980984696
