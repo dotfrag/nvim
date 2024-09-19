@@ -5,6 +5,16 @@ local del = vim.keymap.del
 del("n", "<leader>qq")
 map("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit" })
 
+-- Session
+map("n", "<leader>S", function()
+  require("persistence").select()
+end, { desc = "Select Session" })
+
+-- Lazygit
+map("n", "<A-g>", function()
+  LazyVim.lazygit({ cwd = LazyVim.root.git() })
+end, { desc = "Lazygit (Root Dir)" })
+
 -- Buffers
 map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
 map("n", "<leader>ba", function()
