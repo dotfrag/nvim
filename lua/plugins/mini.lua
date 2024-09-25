@@ -10,4 +10,9 @@ return {
     event = "LazyFile",
     opts = {},
   },
+
+  {
+    "tpope/vim-abolish",
+    event = "LazyFile",
+  },
 }
