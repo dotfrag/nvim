@@ -33,6 +33,8 @@ return {
       ["markdown.mdx"] = { "prettierd" },
 
       sql = { "sql_formatter" },
+
+      htmldjango = { "djlint" },
     },
   },
 }
