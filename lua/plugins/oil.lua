@@ -1,6 +1,5 @@
 return {
   "stevearc/oil.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
   cmd = "Oil",
   init = function()
     if vim.fn.argc(-1) == 1 then
