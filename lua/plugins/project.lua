@@ -16,22 +16,22 @@ local pick = function()
       return utils.ansi_from_hl(hl_validate(hl), s)
     end
 
-    ---@param selected string[]
-    ---@param pick? boolean
-    local function cd(selected, pick)
-      local path = selected[1]
-      if vim.fn.getcwd() == vim.env.HOME then
-        local ok = project.set_pwd(path)
-        if ok and not pick then
-          vim.api.nvim_win_close(0, false)
-          LazyVim.info("Change project dir to " .. path)
-        end
-      end
-      if pick then
-        fzf_lua.files({ cwd = path })
-      else
-      end
-    end
+    ------@param selected string[]
+    ------@param pick? boolean
+    ---local function cd(selected, pick)
+    ---  local path = selected[1]
+    ---  if vim.fn.getcwd() == vim.env.HOME then
+    ---    local ok = project.set_pwd(path)
+    ---    if ok and not pick then
+    ---      vim.api.nvim_win_close(0, false)
+    ---      LazyVim.info("Change project dir to " .. path)
+    ---    end
+    ---  end
+    ---  if pick then
+    ---    fzf_lua.files({ cwd = path })
+    ---  else
+    ---  end
+    ---end
 
     local opts = {
       fzf_opts = {
@@ -49,7 +49,8 @@ local pick = function()
       actions = {
         ["default"] = {
           function(selected)
-            cd(selected, true)
+            -- cd(selected, true)
+            fzf_lua.files({ cwd = selected[1] })
           end,
         },
         ["ctrl-s"] = {
@@ -64,7 +65,13 @@ local pick = function()
         },
         ["ctrl-w"] = {
           function(selected)
-            cd(selected)
+            -- cd(selected)
+            local path = selected[1]
+            local ok = project.set_pwd(path)
+            if ok then
+              vim.api.nvim_win_close(0, false)
+              LazyVim.info("Change project dir to " .. path)
+            end
           end,
         },
       },
