@@ -11,9 +11,11 @@ map("n", "<leader>S", function()
 end, { desc = "Select Session" })
 
 -- Lazygit
-map("n", "<A-g>", function()
-  LazyVim.lazygit({ cwd = LazyVim.root.git() })
-end, { desc = "Lazygit (Root Dir)" })
+-- stylua: ignore start
+map("n", "<A-g>", function() LazyVim.lazygit({ size = { width = 1, height = 1 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+map("n", "<leader>gg", function() LazyVim.lazygit({ size = { width = 1, height = 1 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+map("n", "<leader>gG", function() LazyVim.lazygit({ size = { width = 1, height = 1 } }) end, { desc = "Lazygit (cwd)" })
+-- stylua: ignore end
 
 -- Buffers
 map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
