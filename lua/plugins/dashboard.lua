@@ -33,7 +33,7 @@ return {
     local function quit() vim.api.nvim_input("<cmd>qa<cr>") end
     -- stylua: ignore end
 
-    local opts = {
+    return {
       logo = logo,
       theme = "doom",
       hide = {
@@ -64,21 +64,6 @@ return {
         end,
       },
     }
-
-    -- open dashboard after closing lazy
-    if vim.o.filetype == "lazy" then
-      vim.api.nvim_create_autocmd("WinClosed", {
-        pattern = tostring(vim.api.nvim_get_current_win()),
-        once = true,
-        callback = function()
-          vim.schedule(function()
-            vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
-          end)
-        end,
-      })
-    end
-
-    return opts
   end,
   config = function(_, opts)
     local win_height = vim.api.nvim_win_get_height(0) + 2 -- plus 2 for status bar
@@ -93,6 +78,19 @@ return {
     for _, button in ipairs(opts.config.center) do
       button.desc = "  " .. button.desc .. string.rep(" ", 40 - #button.desc)
       button.key_format = "%s"
+    end
+
+    -- open dashboard after closing lazy
+    if vim.o.filetype == "lazy" then
+      vim.api.nvim_create_autocmd("WinClosed", {
+        pattern = tostring(vim.api.nvim_get_current_win()),
+        once = true,
+        callback = function()
+          vim.schedule(function()
+            vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
+          end)
+        end,
+      })
     end
 
     require("dashboard").setup(opts)
