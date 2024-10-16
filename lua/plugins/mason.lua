@@ -8,8 +8,6 @@ return {
       "sql-formatter", -- sql formatter
     })
 
-    LazyVim.on_load("mason.nvim", function()
-      DotVim.run()
-    end)
+    DotVim.mason.update()
   end,
 }
