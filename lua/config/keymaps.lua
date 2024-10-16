@@ -32,6 +32,9 @@ map("n", "<leader>W", "<cmd>noautocmd w<cr>", { desc = "Save Without Formatting"
 map("c", "<C-j>", "<Down>", { desc = "Next Command" })
 map("c", "<C-k>", "<Up>", { desc = "Previous Command" })
 
+-- Center view in insert mode
+map("i", "zz", "<C-o>zz")
+
 -- Regex
 map("n", "<leader>ra", "/[^\\x00-\\x7F]<cr>", { desc = "Find Non-ASCII Characters" })
 map("n", "<leader>rb", "<cmd>s/ /\\r/g<cr>|<cmd>noh<cr>", { desc = "Break Line" })
