@@ -1,0 +1,6 @@
+{
+  "shellcheck_ignore": {
+    "prefix": "shellcheck",
+    "body": ["# shellcheck disable=SC"]
+  }
+}
