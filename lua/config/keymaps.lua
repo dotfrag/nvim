@@ -19,6 +19,7 @@ map("n", "<leader>gG", function() LazyVim.lazygit({ size = { width = 1, height =
 
 -- Buffers
 map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
+map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 map("n", "<leader>ba", function()
   vim.cmd("BufferLineCloseOthers")
   LazyVim.ui.bufremove()
