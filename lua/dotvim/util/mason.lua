@@ -9,6 +9,11 @@ M.debounce_hours = 1
 M.debounce_file = vim.fn.stdpath("state") .. "/mason-update-debounce"
 M.start_delay = 1
 
+M.notify = function(m, level)
+  level = level or "INFO"
+  vim.notify(m, vim.log.levels[level], { title = "Mason" })
+end
+
 M.read_last_timestamp = function()
   local f = io.open(M.debounce_file)
   if f ~= nil then
@@ -36,11 +41,6 @@ M.can_run = function()
     return true
   end
   return false
-end
-
-M.notify = function(m, level)
-  level = level or "INFO"
-  vim.notify(m, vim.log.levels[level])
 end
 
 M.update_packages = function()
