@@ -7,5 +7,9 @@ return {
       "prettierd", -- html formatter
       "sql-formatter", -- sql formatter
     })
+
+    LazyVim.on_load("mason.nvim", function()
+      DotVim.run()
+    end)
   end,
 }
