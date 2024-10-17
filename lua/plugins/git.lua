@@ -60,7 +60,12 @@ return {
         },
       },
     },
-    opts = {},
+    opts = {
+      signs = {
+        item = { "", "" },
+        section = { "", "" },
+      },
+    },
     keys = { { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" } },
   },
 
