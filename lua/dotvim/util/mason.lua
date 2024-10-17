@@ -52,41 +52,43 @@ M.update_packages = function()
 
   M.notify("Checking for package updates...")
   registry.update(vim.schedule_wrap(function(success, registries)
-    if success then
-      local installed_pkgs = registry.get_installed_packages()
-      local running = #installed_pkgs
-      local no_pkgs = running == 0
+    if not success then
+      M.notify(("Failed to update registries: %s"):format(registries), "ERROR")
+      return
+    end
 
-      if no_pkgs then
-        M.notify("No updates available")
-      else
-        local updated = false
-        for _, pkg in ipairs(installed_pkgs) do
-          pkg:check_new_version(function(update_available, version)
-            if update_available then
-              updated = true
-              M.notify(("Updating `%s` to %s"):format(pkg.name, version.latest_version))
-              pkg:install():on("closed", function()
-                running = running - 1
-                if running == 0 then
-                  M.notify("Update Complete")
-                end
-              end)
-            else
-              running = running - 1
-              if running == 0 then
-                if updated then
-                  M.notify("Update Complete")
-                else
-                  M.notify("No updates available")
-                end
-              end
+    local installed_pkgs = registry.get_installed_packages()
+    local running = #installed_pkgs
+    local no_pkgs = running == 0
+
+    if no_pkgs then
+      M.notify("No updates available")
+      return
+    end
+
+    local updated = false
+    for _, pkg in ipairs(installed_pkgs) do
+      pkg:check_new_version(function(update_available, version)
+        if update_available then
+          updated = true
+          M.notify(("Updating %s to %s"):format(pkg.name, version.latest_version))
+          pkg:install():on("closed", function()
+            running = running - 1
+            if running == 0 then
+              M.notify("Update Complete")
             end
           end)
+        else
+          running = running - 1
+          if running == 0 then
+            if updated then
+              M.notify("Update Complete")
+            else
+              M.notify("No updates available")
+            end
+          end
         end
-      end
-    else
-      M.notify(("Failed to update registries: %s"):format(registries), "ERROR")
+      end)
     end
   end))
 end
