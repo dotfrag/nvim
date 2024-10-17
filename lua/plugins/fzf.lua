@@ -20,7 +20,7 @@ return {
           cwd = LazyVim.get_plugin_path("LazyVim"),
           fd_opts = "-e lua" .. fd_opts,
         }),
-        desc = "Find Plugin Files",
+        desc = "Find LazyVim Files",
       },
       {
         "<leader>fL",
@@ -28,7 +28,7 @@ return {
           cwd = LazyVim.get_plugin_path("LazyVim"),
           rg_opts = "-g '*.lua'" .. rg_opts,
         }),
-        desc = "Grep Plugin Files",
+        desc = "Grep LazyVim Files",
       },
     })
   end,
