@@ -1,5 +1,6 @@
 return {
-  "hrsh7th/nvim-cmp",
+  "iguanacucumber/magazine.nvim",
+  name = "nvim-cmp",
   opts = function(_, opts)
     local cmp = require("cmp")
     opts.mapping["<CR>"] = function(fallback)
