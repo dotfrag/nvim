@@ -35,6 +35,12 @@ map("c", "<C-k>", "<Up>", { desc = "Previous Command" })
 -- Center view in insert mode
 map("i", "zz", "<C-o>zz")
 
+-- Insert text in insert mode
+map("i", "II", "<C-o>I")
+
+-- Append text in insert mode
+map("i", "AA", "<C-o>A")
+
 -- Regex
 map("n", "<leader>ra", "/[^\\x00-\\x7F]<cr>", { desc = "Find Non-ASCII Characters" })
 map("n", "<leader>rb", "<cmd>s/ /\\r/g<cr>|<cmd>noh<cr>", { desc = "Break Line" })
