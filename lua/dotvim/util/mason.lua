@@ -2,6 +2,7 @@
 -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
 -- https://github.com/AstroNvim/astrocore/blob/main/lua/astrocore/mason.lua
 
+---@class dotvim.util.mason
 local M = {}
 
 M.debounce = true
@@ -9,12 +10,12 @@ M.debounce_hours = 1
 M.debounce_file = vim.fn.stdpath("state") .. "/mason-update-debounce"
 M.start_delay = 1
 
-M.notify = function(m, level)
+function M.notify(m, level)
   level = level or "INFO"
   vim.notify(m, vim.log.levels[level], { title = "Mason" })
 end
 
-M.read_last_timestamp = function()
+function M.read_last_timestamp()
   local f = io.open(M.debounce_file)
   if f ~= nil then
     local last = f:read()
@@ -24,13 +25,13 @@ M.read_last_timestamp = function()
   return nil
 end
 
-M.write_new_timestamp = function()
+function M.write_new_timestamp()
   local f = assert(io.open(M.debounce_file, "w+"))
   f:write(os.time())
   f:close()
 end
 
-M.can_run = function()
+function M.can_run()
   local last = M.read_last_timestamp()
   if last == nil then
     M.write_new_timestamp()
@@ -43,7 +44,7 @@ M.can_run = function()
   return false
 end
 
-M.update_packages = function()
+function M.update_packages()
   local ok, registry = pcall(require, "mason-registry")
   if not ok then
     vim.api.nvim_err_writeln("Unable to access mason registry")
@@ -93,7 +94,7 @@ M.update_packages = function()
   end))
 end
 
-M.update = function()
+function M.update()
   if M.debounce and not M.can_run() then
     return
   end
