@@ -3,15 +3,33 @@ return {
   opts = function(_, opts)
     opts.presets.lsp_doc_border = true
     vim.list_extend(opts.routes, {
+      -- mini
       {
         filter = {
-          event = "msg_show",
           any = {
-            { find = "E486" }, -- Pattern not found
-            { find = "E21" }, -- Cannot make changes, 'modifiable' is off
+            {
+              event = "msg_show",
+              any = {
+                { find = "E486" }, -- Pattern not found
+                { find = "E21" }, -- Cannot make changes, 'modifiable' is off
+              },
+            },
+            {
+              event = "notify",
+              find = "Toggling hidden files:", -- Neo-tree hidden files
+            },
           },
         },
         view = "mini",
+      },
+
+      -- skip
+      {
+        filter = {
+          event = "msg_show",
+          find = "^/", -- Search pattern
+        },
+        opts = { skip = true },
       },
     })
   end,
