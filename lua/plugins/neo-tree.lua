@@ -71,5 +71,11 @@ return {
         -- l = "expand_or_open",
       },
     },
+    filesystem = {
+      filtered_items = {
+        hide_dotfiles = false,
+        hide_by_name = { ".git" },
+      },
+    },
   },
 }
