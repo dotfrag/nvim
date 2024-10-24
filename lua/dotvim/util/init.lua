@@ -1,4 +1,5 @@
 ---@class dotvim.util
+---@field fzf dotvim.util.fzf
 ---@field mason dotvim.util.mason
 local M = {}
 

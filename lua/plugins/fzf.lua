@@ -30,6 +30,7 @@ return {
         }),
         desc = "Grep LazyVim Files",
       },
+      { "<leader>fP", DotVim.fzf.plugin_files, desc = "Find Plugin Files" },
     })
   end,
 }
