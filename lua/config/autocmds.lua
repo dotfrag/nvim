@@ -1,8 +1,8 @@
+local autocmd = vim.api.nvim_create_autocmd
+
 local function augroup(name)
   return vim.api.nvim_create_augroup("dotvim_" .. name, { clear = true })
 end
-
-local autocmd = vim.api.nvim_create_autocmd
 
 -- close some filetypes with <q>
 -- https://github.com/LazyVim/LazyVim/blob/6202dd164466250b5c188918b34b3e8a3fec2604/lua/lazyvim/config/autocmds.lua#L53
@@ -13,7 +13,21 @@ autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, desc = "Quit buffer" })
+    vim.schedule(function()
+      vim.keymap.set("n", "q", function()
+        vim.cmd("close")
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end, { buffer = event.buf, silent = true, desc = "Quit buffer" })
+    end)
+  end,
+})
+
+-- disable autoformat for yazi config files
+autocmd("BufEnter", {
+  group = augroup("disable_autoformat"),
+  pattern = "*/yazi/*.toml",
+  callback = function()
+    vim.b.autoformat = false
   end,
 })
 
@@ -45,15 +59,6 @@ autocmd("FileType", {
 --   end,
 -- })
 
--- disable autoformat for yazi config files
-autocmd("BufEnter", {
-  group = augroup("disable_autoformat"),
-  pattern = "*/yazi/*.toml",
-  callback = function()
-    vim.b.autoformat = false
-  end,
-})
-
 -- -- organise imports for typescript files
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --   group = augroup("organise_imports"),
@@ -64,4 +69,21 @@ autocmd("BufEnter", {
 --     ---@diagnostic disable-next-line: assign-type-mismatch
 --     vim.lsp.buf.code_action({ apply = true, context = { only = { "source.removeUnused.ts" }, diagnostics = {} } })
 --   end,
+-- })
+
+-- -- format options
+-- -- https://github.com/dpetka2001/dotfiles/blob/main/dot_config/nvim/lua/config/autocmds.lua
+-- autocmd("FileType", {
+--   pattern = { "*" },
+--   callback = function()
+--     -- vim.opt.formatoptions = vim.opt.formatoptions - "o"
+--     if vim.bo["ft"] == "css" then
+--       vim.opt_local.formatoptions:remove("r") -- don't enter comment leader on Enter in css files
+--     end
+--     vim.opt.formatoptions = vim.opt.formatoptions + {
+--       o = false, -- Don't continue comments with o and O
+--     }
+--   end,
+--   group = "mygroup",
+--   desc = "Don't continue comments with o and O",
 -- })
