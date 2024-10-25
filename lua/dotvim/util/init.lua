@@ -14,14 +14,14 @@ setmetatable(M, {
 function M.modeline(long_format)
   local tabstop = vim.bo.tabstop
   local shiftwidth = vim.bo.shiftwidth
-  local textwidth = vim.bo.textwidth
+  -- local textwidth = vim.bo.textwidth
   local expandtab = vim.bo.expandtab and "" or "no"
 
   local modeline
   if long_format then
-    modeline = string.format("vim: set ts=%d sw=%d tw=%d %set :", tabstop, shiftwidth, textwidth, expandtab)
+    modeline = string.format("vim: set ts=%d sw=%d %set :", tabstop, shiftwidth, expandtab)
   else
-    modeline = string.format("vim: ts=%d sw=%d tw=%d %set", tabstop, shiftwidth, textwidth, expandtab)
+    modeline = string.format("vim: ts=%d sw=%d %set", tabstop, shiftwidth, expandtab)
   end
 
   local commentstring = require("ts-comments.comments").get(vim.bo.filetype) or vim.bo.commentstring
