@@ -6,7 +6,7 @@
 local M = {}
 
 M.debounce = true
-M.debounce_hours = 1
+M.debounce_hours = 5
 M.debounce_file = vim.fn.stdpath("state") .. "/mason-update-debounce"
 M.start_delay = 1
 
