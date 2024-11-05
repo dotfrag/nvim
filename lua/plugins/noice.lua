@@ -12,6 +12,7 @@ return {
               any = {
                 { find = "E486" }, -- Pattern not found
                 { find = "E21" }, -- Cannot make changes, 'modifiable' is off
+                { find = "Already at newest change" }, -- C-r
               },
             },
             {
