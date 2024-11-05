@@ -1,3 +1,5 @@
+_G.DotVim = require("dotvim.util")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -14,11 +16,11 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-_G.DotVim = require("dotvim.util")
+local dev = vim.uv.fs_stat(vim.env.HOME .. "/projects/LazyVim") and true or false
 
 require("lazy").setup({
   spec = {
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim", dev = dev, import = "lazyvim.plugins" },
     { import = "plugins" },
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
