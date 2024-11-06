@@ -12,9 +12,9 @@ end, { desc = "Select Session" })
 
 -- Lazygit
 -- stylua: ignore start
-map("n", "<A-g>", function() Snacks.lazygit({ size = { width = 1, height = 1 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
-map("n", "<leader>gg", function() Snacks.lazygit({ size = { width = 1, height = 1 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
-map("n", "<leader>gG", function() Snacks.lazygit({ size = { width = 1, height = 1 } }) end, { desc = "Lazygit (cwd)" })
+map("n", "<A-g>", function() Snacks.lazygit({ win = { width = 0, height = 0 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+map("n", "<leader>gg", function() Snacks.lazygit({ win = { width = 0, height = 0 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+map("n", "<leader>gG", function() Snacks.lazygit({ win = { width = 0, height = 0 } }) end, { desc = "Lazygit (cwd)" })
 -- stylua: ignore end
 
 -- Buffers
