@@ -12,17 +12,19 @@ end, { desc = "Select Session" })
 
 -- Lazygit
 -- stylua: ignore start
-map("n", "<A-g>", function() LazyVim.lazygit({ size = { width = 1, height = 1 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
-map("n", "<leader>gg", function() LazyVim.lazygit({ size = { width = 1, height = 1 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
-map("n", "<leader>gG", function() LazyVim.lazygit({ size = { width = 1, height = 1 } }) end, { desc = "Lazygit (cwd)" })
+map("n", "<A-g>", function() Snacks.lazygit({ size = { width = 1, height = 1 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+map("n", "<leader>gg", function() Snacks.lazygit({ size = { width = 1, height = 1 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+map("n", "<leader>gG", function() Snacks.lazygit({ size = { width = 1, height = 1 } }) end, { desc = "Lazygit (cwd)" })
 -- stylua: ignore end
 
 -- Buffers
-map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
+map("n", "<leader>d", function()
+  Snacks.bufdelete()
+end, { desc = "Delete Buffer" })
 map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 map("n", "<leader>ba", function()
   vim.cmd("BufferLineCloseOthers")
-  LazyVim.ui.bufremove()
+  Snacks.bufdelete()
 end, { desc = "Delete All Buffers" })
 
 -- Save without formatting
