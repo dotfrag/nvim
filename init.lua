@@ -1,4 +1,10 @@
 _G.DotVim = require("dotvim.util")
+_G.dd = function(...)
+  Snacks.debug.inspect(...)
+end
+_G.bt = function()
+  Snacks.debug.backtrace()
+end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
