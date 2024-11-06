@@ -3,6 +3,14 @@ local M = {}
 
 local fzf_lua = require("fzf-lua")
 
+---@param str string
+local function title(str)
+  return {
+    title = " " .. str .. " ",
+    title_pos = "center",
+  }
+end
+
 function M.plugin_files()
   local path = vim.fn.stdpath("data") .. "/lazy/"
   local dirs = vim.fs.dir(path)
@@ -14,6 +22,7 @@ function M.plugin_files()
 
   local opts = {
     fzf_colors = true,
+    winopts = title("Plugins"),
     actions = {
       ["default"] = {
         function(selected)
@@ -78,6 +87,7 @@ function M.projects()
         ),
       },
       fzf_colors = true,
+      winopts = title("Projects"),
       actions = {
         ["default"] = {
           function(selected)
