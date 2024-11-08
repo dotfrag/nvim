@@ -10,22 +10,22 @@ map("n", "<leader>S", function()
   require("persistence").select()
 end, { desc = "Select Session" })
 
--- Lazygit
 -- stylua: ignore start
+
+-- Terminal
+map("n", "<c-/>", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
+
+-- Lazygit
 map("n", "<A-g>", function() Snacks.lazygit({ win = { width = 0, height = 0 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
 map("n", "<leader>gg", function() Snacks.lazygit({ win = { width = 0, height = 0 }, cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
 map("n", "<leader>gG", function() Snacks.lazygit({ win = { width = 0, height = 0 } }) end, { desc = "Lazygit (cwd)" })
--- stylua: ignore end
 
 -- Buffers
-map("n", "<leader>d", function()
-  Snacks.bufdelete()
-end, { desc = "Delete Buffer" })
+map("n", "<leader>d", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
 map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
-map("n", "<leader>ba", function()
-  vim.cmd("BufferLineCloseOthers")
-  Snacks.bufdelete()
-end, { desc = "Delete All Buffers" })
+map("n", "<leader>ba", function() Snacks.bufdelete.all() end, { desc = "Delete All Buffers" })
+
+-- stylua: ignore end
 
 -- Save without formatting
 map("n", "<leader>W", "<cmd>noautocmd w<cr>", { desc = "Save Without Formatting" })
