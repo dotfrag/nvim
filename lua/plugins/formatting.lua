@@ -7,7 +7,6 @@ local sql_formatter_opts = {
 
 return {
   "stevearc/conform.nvim",
-  optional = true,
   opts = {
     formatters = {
       shfmt = { prepend_args = { "-i", "2", "-ci" } },
@@ -15,7 +14,9 @@ return {
       sql_formatter = { prepend_args = { "--config", vim.json.encode(sql_formatter_opts) } },
     },
     formatters_by_ft = {
+      --- shell
       fish = {}, -- reset lazyvim value
+      sh = { "shfmt", "shellcheck" },
 
       -- biome
       javascript = { "biome" },
@@ -32,11 +33,9 @@ return {
       markdown = { "prettierd" },
       ["markdown.mdx"] = { "prettierd" },
 
-      sql = { "sql_formatter" },
-
       htmldjango = { "djlint" },
-
       python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+      sql = { "sql_formatter" },
     },
   },
 }
