@@ -22,6 +22,19 @@ autocmd("FileType", {
   end,
 })
 
+-- custom formatters for json files
+autocmd("FileType", {
+  group = augroup("formatters_json"),
+  pattern = { "json" },
+  callback = function(event)
+    vim.keymap.set("n", "<leader>cq", function()
+      local filepath = vim.fn.expand("%:p")
+      -- stylua: ignore
+      vim.cmd("!jq 'to_entries|sort|from_entries' " .. filepath .. " > " .. filepath .. ".tmp && mv -vi -f " .. filepath .. ".tmp " .. filepath)
+    end, { buffer = event.buf, desc = "Sort JSON Keys" })
+  end,
+})
+
 -- disable autoformat for yazi config files
 autocmd("BufEnter", {
   group = augroup("disable_autoformat"),
