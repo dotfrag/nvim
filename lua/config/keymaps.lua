@@ -5,6 +5,13 @@ local del = vim.keymap.del
 del("n", "<leader>qq")
 map("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit" })
 
+-- Save file
+-- https://github.com/LazyVim/LazyVim/discussions/4600#discussioncomment-10974159
+map({ "i", "x", "n", "s" }, "<C-s>", "<esc><cmd>w<cr>", { desc = "Save File" })
+
+-- Save without formatting
+map("n", "<leader>W", "<cmd>noautocmd w<cr>", { desc = "Save Without Formatting" })
+
 -- Session
 map("n", "<leader>S", function()
   require("persistence").select()
@@ -26,9 +33,6 @@ map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 map("n", "<leader>ba", function() Snacks.bufdelete.all() end, { desc = "Delete All Buffers" })
 
 -- stylua: ignore end
-
--- Save without formatting
-map("n", "<leader>W", "<cmd>noautocmd w<cr>", { desc = "Save Without Formatting" })
 
 -- Navigate command-line history
 map("c", "<C-j>", "<Down>", { desc = "Next Command" })
