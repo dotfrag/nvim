@@ -18,15 +18,9 @@ return {
       fish = {}, -- reset lazyvim value
       sh = { "shfmt", "shellcheck" },
 
-      -- biome
-      javascript = { "biome" },
-      typescript = { "biome" },
-      json = { "biome" },
-      jsonc = { "biome" },
-
       -- prettier
       html = { "prettierd" },
-      css = { "prettierd" },
+      -- css = { "prettierd" },
       scss = { "prettierd" },
       less = { "prettierd" },
       yaml = { "prettierd" },
