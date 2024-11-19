@@ -12,12 +12,10 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<esc><cmd>w<cr>", { desc = "Save File" })
 -- Save without formatting
 map("n", "<leader>W", "<cmd>noautocmd w<cr>", { desc = "Save Without Formatting" })
 
--- Session
-map("n", "<leader>S", function()
-  require("persistence").select()
-end, { desc = "Select Session" })
-
 -- stylua: ignore start
+
+-- Session
+map("n", "<leader>S", function() require("persistence").select() end, { desc = "Select Session" })
 
 -- Terminal
 map("n", "<c-/>", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
