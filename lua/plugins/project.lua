@@ -23,4 +23,17 @@ return {
       table.insert(opts.config.center, 3, projects)
     end,
   },
+
+  {
+    "folke/snacks.nvim",
+    optional = true,
+    opts = function(_, opts)
+      table.insert(opts.dashboard.preset.keys, 3, {
+        action = DotVim.fzf.projects,
+        desc = "Projects",
+        icon = " ",
+        key = "p",
+      })
+    end,
+  },
 }
