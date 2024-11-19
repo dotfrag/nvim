@@ -25,6 +25,7 @@ return {
     optional = true,
     opts = {
       dashboard = {
+        width = 50,
         preset = {
           header = header,
           -- stylua: ignore
