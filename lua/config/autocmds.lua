@@ -38,7 +38,10 @@ autocmd("FileType", {
 -- disable autoformat for yazi config files
 autocmd("BufEnter", {
   group = augroup("disable_autoformat"),
-  pattern = "*/yazi/*.toml",
+  pattern = {
+    "*/waybar/config*",
+    "*/yazi/*.toml",
+  },
   callback = function()
     vim.b.autoformat = false
   end,
