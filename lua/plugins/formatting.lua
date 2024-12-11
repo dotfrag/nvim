@@ -10,7 +10,6 @@ return {
   opts = {
     formatters = {
       shfmt = { prepend_args = { "-i", "2", "-ci" } },
-      biome = { prepend_args = { "format", "--indent-style", "space" } },
       sql_formatter = { prepend_args = { "--config", vim.json.encode(sql_formatter_opts) } },
     },
     formatters_by_ft = {
