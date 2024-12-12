@@ -10,9 +10,7 @@ return {
           wo = { wrap = true }, -- wrap notifications
         },
       },
-      indent = {},
+      scroll = { enabled = false },
     },
   },
-
-  { "lukas-reineke/indent-blankline.nvim", enabled = false },
 }
