@@ -1,3 +1,5 @@
+---@diagnostic disable: missing-fields
+
 local border_cmp = {
   { "󱐋", "WarningMsg" },
   { "─", "Comment" },
@@ -68,10 +70,11 @@ return {
   {
     "saghen/blink.cmp",
     optional = true,
+    ---@type blink.cmp.Config
     opts = {
-      windows = {
-        autocomplete = { border = border_cmp },
-        documentation = { border = border_doc },
+      completion = {
+        menu = { border = border_cmp },
+        documentation = { window = { border = border_doc } },
       },
     },
   },
