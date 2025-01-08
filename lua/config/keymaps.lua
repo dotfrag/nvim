@@ -1,8 +1,14 @@
+---@diagnostic disable: missing-fields
+
 local map = vim.keymap.set
 local del = vim.keymap.del
 
--- Quit
+-- Unset LazyVim mappings
+del("n", "<leader>dph")
+del("n", "<leader>dpp")
 del("n", "<leader>qq")
+
+-- Quit
 map("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit" })
 
 -- Save file

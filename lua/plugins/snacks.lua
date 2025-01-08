@@ -1,6 +1,9 @@
 return {
   {
     "folke/snacks.nvim",
+    keys = {
+      { "<leader>dps", false },
+    },
     opts = {
       words = {
         debounce = 250, -- time in ms to wait before updating
