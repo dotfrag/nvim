@@ -13,7 +13,12 @@ return {
           wo = { wrap = true }, -- wrap notifications
         },
       },
-      scroll = { enabled = false },
+      scroll = {
+        -- enabled = false,
+        animate = {
+          easing = "outQuad",
+        },
+      },
     },
   },
 }
