@@ -10,6 +10,7 @@ autocmd("FileType", {
   group = "lazyvim_close_with_q",
   pattern = {
     "fugitiveblame",
+    "git",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
