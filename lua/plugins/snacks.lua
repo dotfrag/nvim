@@ -14,7 +14,7 @@ return {
         },
       },
       scroll = {
-        -- enabled = false,
+        enabled = false,
         animate = {
           easing = "outQuad",
         },
