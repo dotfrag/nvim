@@ -33,7 +33,8 @@ return {
           keys = {
             { icon = " ", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')", key = "f" },
             { icon = " ", desc = "New File", action = ":ene | startinsert", key = "n" },
-            { icon = " ", desc = "Explorer", action = ":Neotree", key = "e" },
+            ---@diagnostic disable-next-line: missing-fields
+            { icon = " ", desc = "Explorer", action = function() Snacks.explorer({ cwd = LazyVim.root() }) end , key = "e" },
             { icon = " ", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')", key = "r" },
             { icon = " ", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')", key = "g" },
             { icon = " ", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", key = "c" },
