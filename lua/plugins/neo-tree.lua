@@ -2,6 +2,7 @@ return {
   -- https://github.com/AstroNvim/AstroNvim/blob/main/lua/astronvim/plugins/neo-tree.lua
   -- https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Tips#navigation-with-hjkl
   "nvim-neo-tree/neo-tree.nvim",
+  optional = true,
   init = function() end,
   opts = {
     commands = {
