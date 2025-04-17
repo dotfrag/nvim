@@ -9,7 +9,9 @@ return {
   "stevearc/conform.nvim",
   opts = {
     formatters = {
-      shfmt = { prepend_args = { "-i", "2", "-ci" } },
+      shfmt = {
+        prepend_args = { "--simplify", "--indent", "2", "--binary-next-line", "--case-indent", "--space-redirects" },
+      },
       sql_formatter = { prepend_args = { "--config", vim.json.encode(sql_formatter_opts) } },
     },
     formatters_by_ft = {
